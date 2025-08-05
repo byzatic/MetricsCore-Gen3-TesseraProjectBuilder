@@ -1,0 +1,145 @@
+project_version: v1.0.0-SingleRootStrictNestedNodeTree
+project_name: bpm_test_mcgen3
+pqleta_config:
+  - source_url: http://0.0.0.0:44459/
+    hosts: []
+    import_by_type:
+      - type_name: "aggregation_main"
+        pqleta_id: "Status selectel_1 aggregation_main"
+        labels_for_filtering:
+          - key: "aggregation_main"
+            value: "selectel_1"
+  - source_url: http://0.0.0.0:28459/
+    hosts:
+      - host_name: 0.0.0.0
+        fs_unit:
+          - mountpoint: /dev/mapper/ro-root
+    import_by_type: []
+
+nodes:
+  - node_type: org_node
+    data_type: external_mc_exporter
+    data_name: selectel_1
+    node_name: external_mc_exporter->selectel_1
+    data_origin:
+      - "Status selectel_1 aggregation_main"
+    disable_mc_import_alarm: []
+    grafana_url: http://0.0.0.0:44480/grafana/d/level_2/pad-hosts-aggregator?orgId=1&refresh=5s&from=now-6h&to=now
+    downstream: []
+    node_id: cccccccc-677b-4090-b6d2-266452269568
+
+
+  - node_type: org_node
+    data_type: aggregation_main
+    data_name: bpm_test
+    node_name: aggregation_main->bpm_test
+    data_origin: []
+    disable_mc_import_alarm: []
+    grafana_url: http://0.0.0.0:44480/grafana/d/level_1/global-agregation?orgId=1&refresh=5s
+    downstream:
+      - c293b7bd-677b-4090-b6d2-266452269568
+      - cccccccc-677b-4090-b6d2-266452269568
+    node_id: 23b51c9a-56ad-4e26-ae3d-b9f9856b2f67
+  - node_type: org_node
+    data_type: aggregation_hosts
+    data_name: group1
+    node_name: aggregation_hosts->group1
+    data_origin: []
+    disable_mc_import_alarm: []
+    grafana_url: http://0.0.0.0:44480/grafana/d/level_2/pad-hosts-aggregator?orgId=1&refresh=5s&from=now-6h&to=now
+    downstream:
+      - 2639de74-7d0c-45fb-9b71-0f711d6c7e57
+    node_id: c293b7bd-677b-4090-b6d2-266452269568
+  - node_type: org_node
+    data_type: host
+    data_name: 0.0.0.0
+    node_name: host->0.0.0.0
+    data_origin: []
+    disable_mc_import_alarm: []
+    grafana_url: http://0.0.0.0:44480/grafana/d/level_3_hardware/pad-hosts-hardware?orgId=1&refresh=1m
+    downstream:
+      - aadd2f86-e9d1-4a9c-80dd-f60287ca88de
+      - 23638a5a-3fe8-4f76-93c2-342cacf7ad5d
+      - 3e16568a-c188-45d9-a42b-cec96216b60d
+      - 37b44867-d770-4fba-871e-b0f98a9eab7c
+    node_id: 2639de74-7d0c-45fb-9b71-0f711d6c7e57
+  - node_type: org_node
+    data_type: hardware_abstract
+    data_name: filesystem
+    node_name: hardware_abstract->filesystem
+    data_origin: []
+    disable_mc_import_alarm: []
+    grafana_url: ''
+    downstream:
+      - 8d0d7be0-82bb-4650-a239-e0d5d2fd7c92
+    node_id: aadd2f86-e9d1-4a9c-80dd-f60287ca88de
+  - node_type: data_node
+    data_type: hardware_abstract_unit
+    data_name: ro-root
+    node_name: hardware_abstract_unit->ro-root
+    data_origin:
+      - Status 0.0.0.0 filesystem ro-root
+    disable_mc_import_alarm: []
+    grafana_url: ''
+    downstream: []
+    node_id: 8d0d7be0-82bb-4650-a239-e0d5d2fd7c92
+  - node_type: org_node
+    data_type: hardware_abstract
+    data_name: ram
+    node_name: hardware_abstract->ram
+    data_origin: []
+    disable_mc_import_alarm: []
+    grafana_url: ''
+    downstream:
+      - f34fe125-93fb-4914-a613-1aa0e414229c
+    node_id: 23638a5a-3fe8-4f76-93c2-342cacf7ad5d
+  - node_type: org_node
+    data_type: hardware_abstract
+    data_name: swap
+    node_name: hardware_abstract->swap
+    data_origin: []
+    disable_mc_import_alarm: []
+    grafana_url: ''
+    downstream:
+      - 654684b8-b958-4e87-9757-0d190cf13585
+    node_id: 3e16568a-c188-45d9-a42b-cec96216b60d
+  - node_type: data_node
+    data_type: hardware_abstract_unit
+    data_name: ram
+    node_name: hardware_abstract_unit->ram
+    data_origin:
+      - Status 0.0.0.0 ram
+    disable_mc_import_alarm: []
+    grafana_url: ''
+    downstream: []
+    node_id: f34fe125-93fb-4914-a613-1aa0e414229c
+  - node_type: data_node
+    data_type: hardware_abstract_unit
+    data_name: swap
+    node_name: hardware_abstract_unit->swap
+    data_origin:
+      - Status 0.0.0.0 swap
+    disable_mc_import_alarm: []
+    grafana_url: ''
+    downstream: []
+    node_id: 654684b8-b958-4e87-9757-0d190cf13585
+  - node_type: org_node
+    data_type: hardware_abstract
+    data_name: cpu
+    node_name: hardware_abstract->cpu
+    data_origin: []
+    disable_mc_import_alarm: []
+    grafana_url: ''
+    downstream:
+      - bfe880fb-9eab-405a-9e33-cef8a12ea229
+    node_id: 37b44867-d770-4fba-871e-b0f98a9eab7c
+  - node_type: data_node
+    data_type: hardware_abstract_unit
+    data_name: cpu
+    node_name: hardware_abstract_unit->cpu
+    data_origin:
+      - Status 0.0.0.0 cpu
+    disable_mc_import_alarm: []
+    grafana_url: ''
+    downstream: []
+    node_id: bfe880fb-9eab-405a-9e33-cef8a12ea229
