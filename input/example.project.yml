@@ -1,0 +1,112 @@
+project_version: "v1.0.0"
+project_name: "MyAwesomeProject"
+pqleta_config:
+  - source_url: "http://84.38.187.106:44459/"
+    hosts:
+      - host_name: "84.38.187.106"
+        fs_unit:
+          - mountpoint: "/dev/mapper/vg0-root"
+
+nodes:
+  - node_type: org_node
+    data_type: aggregation_hosts
+    data_name: group1
+    data_origin: [ ]
+    disable_mc_import_alarm: [ ]
+    grafana_url: http://84.38.187.106:44480/grafana/d/level_2/pad-hosts-aggregator?orgId=1&refresh=5s&from=now-6h&to=now
+    downstream:
+      - host->84.38.187.106
+
+  - node_type: org_node
+    data_type: host
+    data_name: 84.38.187.106
+    data_origin: [ ]
+    disable_mc_import_alarm: [ ]
+    grafana_url: http://84.38.187.106:44480/grafana/d/level_3_hardware/pad-hosts-hardware?orgId=1&refresh=1m
+    downstream:
+      - hardware_abstract->filesystem
+      - hardware_abstract->ram
+      - hardware_abstract->swap
+      - hardware_abstract->cpu
+
+  - node_type: org_node
+    data_type: hardware_abstract
+    data_name: filesystem
+    data_origin: [ ]
+    disable_mc_import_alarm: [ ]
+    grafana_url: ''
+    downstream:
+      - hardware_abstract_unit->vg0-root
+
+  - node_type: data_node
+    data_type: hardware_abstract_unit
+    data_name: vg0-root
+    data_origin:
+      - Status 84.38.187.106 filesystem vg0-root
+    disable_mc_import_alarm: [ ]
+    grafana_url: ''
+    downstream: [ ]
+
+  - node_type: org_node
+    data_type: hardware_abstract
+    data_name: ram
+    data_origin: [ ]
+    disable_mc_import_alarm: [ ]
+    grafana_url: ''
+    downstream:
+      - hardware_abstract_unit->ram
+
+  - node_type: org_node
+    data_type: hardware_abstract
+    data_name: swap
+    data_origin: [ ]
+    disable_mc_import_alarm: [ ]
+    grafana_url: ''
+    downstream:
+      - hardware_abstract_unit->swap
+
+  - node_type: data_node
+    data_type: hardware_abstract_unit
+    data_name: ram
+    data_origin:
+      - Status 84.38.187.106 ram
+    disable_mc_import_alarm: [ ]
+    grafana_url: ''
+    downstream: [ ]
+
+  - node_type: data_node
+    data_type: hardware_abstract_unit
+    data_name: swap
+    data_origin:
+      - Status 84.38.187.106 swap
+    disable_mc_import_alarm: [ ]
+    grafana_url: ''
+    downstream: [ ]
+
+  - node_type: org_node
+    data_type: aggregation_main
+    data_name: selectel_1
+    data_origin: [ ]
+    disable_mc_import_alarm: [ ]
+    grafana_url: http://84.38.187.106:44480/grafana/d/level_1/global-agregation?orgId=1&refresh=5s
+    downstream:
+      - aggregation_hosts->group1
+
+  - node_type: org_node
+    data_type: hardware_abstract
+    data_name: cpu
+    data_origin: [ ]
+    disable_mc_import_alarm: [ ]
+    grafana_url: ''
+    downstream:
+      - hardware_abstract_unit->cpu
+
+  - node_type: data_node
+    data_type: hardware_abstract_unit
+    data_name: cpu
+    data_origin:
+      - Status 84.38.187.106 cpu
+    disable_mc_import_alarm: [ ]
+    grafana_url: ''
+    downstream: [ ]
+
