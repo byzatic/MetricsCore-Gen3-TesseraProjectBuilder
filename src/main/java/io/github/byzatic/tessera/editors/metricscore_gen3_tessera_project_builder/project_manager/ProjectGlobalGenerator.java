@@ -68,7 +68,7 @@ class ProjectGlobalGenerator {
 
         ServiceOptionItem optionCronMetricUpdateString = ServiceOptionItem.newBuilder()
                 .setName("cronMetricUpdateString")
-                .setData("*/1 * * * * ?")
+                .setData("*/1 * * * * *")
                 .build();
         serviceOptionItems.add(optionCronMetricUpdateString);
 

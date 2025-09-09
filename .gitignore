@@ -46,5 +46,7 @@ logs/*
 output/*
 # Игнорировать всё в input
 input/*
+# Игнорировать всё в input
+/src/main/resources/modules/*
 # Не игнорировать example.project.yml в input
 !input/example.project.yml
